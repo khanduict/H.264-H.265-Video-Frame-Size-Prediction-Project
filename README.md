@@ -31,6 +31,7 @@ As for the H.265 encoded video traces, the curves of the autocorrelation between
 # Proposed Model
 <img width="312" alt="image" src="https://user-images.githubusercontent.com/38637722/179399350-09acab2b-2988-494f-90be-70def39f193c.png">
 The proposed model architecture for predicting the frame size. We present only the LSTM and seq2seq models in the figure (the approach is similar for the other models that we have used in this study). The input of our model consists of frame size, frame type and arrival time. Based on the encoding sequence of a GoP structure, the frame size arrives at an interval of every 33 milliseconds. Feature engineering is carried out by filling the missing values, rescaling the data into similar scale using MinMax scaler. Then we have used a label encoding, as explained above. We then partitioned the data into a training (80%) and test (20%) dataset and built the predictive models for each trace separately. Finally, the whole GoP structure regardless of the frame type is fitted to the model to predict the frame size. 
+
 # Results
 <img width="361" alt="image" src="https://user-images.githubusercontent.com/38637722/179399587-a6fc8efc-cfe5-4286-b76f-47124e91d9b4.png">
 <img width="361" alt="image" src="https://user-images.githubusercontent.com/38637722/179399610-17ba3a3d-6ce9-4be8-a961-7687d44fe005.png">
