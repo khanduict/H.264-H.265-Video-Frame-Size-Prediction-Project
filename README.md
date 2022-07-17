@@ -6,11 +6,13 @@ In this study we focus on videos encoded with H.264 and H.265 high efficiency vi
 Figure 1 shows an encoded sequence IBBBPBBBPBBBPBBBI of the GoP comprising of 16 frames (G16B3) with 1 I-frame, 3 P-frames and 12 B-frames. The first frame is encoded as an I-frame. Frames B-1, B-2 and B-3 are B-frames and cannot be encoded right away because they are waiting for the future P-frame. Therefore, they are put in the buffer. When frame P-4 arrives at the encoder, it is inter-encoded (unidirectional) with the first frame (I-frame) as a reference. Now that the P-frame has been encoded, the frames B-1, B-2 and B-3 which are bidirectional need references in the past and in the future, can be encoded. Thus, B-frames are constructed based on the reference frames namely, the P and I-frames.
 <img width="417" alt="image" src="https://user-images.githubusercontent.com/38637722/179394532-63ab150e-1d8b-403a-8597-d8d7ae87e605.png">
 
-B-frames occupy the largest number of frames in H.264 group of pictures (GoP) as shown in Figure 2. In addition, the trace of B-frames is observed to be burstier than other frames which implies that the bandwidth allocation of B-frames is more challenging than the other frame types [3]. On the other hand, B-frames are considered least important as compared to I-frame and P-frames and dropping the same will not have much impact on the performance as the frames transmitted following a B-frame is not dependent on that frame. In addition, B-frames contain only temporal information and their loss can only cause motion artifacts which may be difficult to notice unless the loss rates are high. 
-                                          <img width="293" alt="image" src="https://user-images.githubusercontent.com/38637722/179394842-1129c6de-0706-4cc7-ab31-05102eb0e2b4.png">
+B-frames occupy the largest number of frames in H.264 group of pictures (GoP) as shown in Figure 2. In addition, the trace of B-frames is observed to be burstier than other frames which implies that the bandwidth allocation of B-frames is more challenging than the other frame types [3]. On the other hand, B-frames are considered least important as compared to I-frame and P-frames and dropping the same will not have much impact on the performance as the frames transmitted following a B-frame is not dependent on that frame. In addition, B-frames contain only temporal information and their loss can only cause motion artifacts which may be difficult to notice unless the loss rates are high.
+<img width="293" alt="image" src="https://user-images.githubusercontent.com/38637722/179394869-cc44d6f6-fe8e-4e02-9f78-5ac39fe2e327.png">
 
 Figure 3 illustrates the delay analysis and transmitted sequence of classical G16B3 frame with IBBBPBBBPBBBPBBBI GoP pattern. The decoder needs both the preceding I and P-frame and the succeeding P and I-frame for decoding a B-frame. The encoder emits the frames in the order IPBBBPBBBPBBBI and, the display sequence is displayed in the order IBBBPBBBPBBBPBBB.
-<img width="293" alt="image" src="https://user-images.githubusercontent.com/38637722/179394402-c0e78554-3c9e-44df-b193-2023fb029f48.png">
+<img width="429" alt="image" src="https://user-images.githubusercontent.com/38637722/179394884-2997039e-dfe0-45c5-ac47-59be4721acc8.png">
+
+
 
 
 
