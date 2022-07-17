@@ -7,7 +7,7 @@ Figure 1 shows an encoded sequence IBBBPBBBPBBBPBBBI of the GoP comprising of 16
 <img width="417" alt="image" src="https://user-images.githubusercontent.com/38637722/179394532-63ab150e-1d8b-403a-8597-d8d7ae87e605.png">
 
 B-frames occupy the largest number of frames in H.264 group of pictures (GoP) as shown in Figure 2. In addition, the trace of B-frames is observed to be burstier than other frames which implies that the bandwidth allocation of B-frames is more challenging than the other frame types [3]. On the other hand, B-frames are considered least important as compared to I-frame and P-frames and dropping the same will not have much impact on the performance as the frames transmitted following a B-frame is not dependent on that frame. In addition, B-frames contain only temporal information and their loss can only cause motion artifacts which may be difficult to notice unless the loss rates are high.
-<img width="133" alt="image" src="https://user-images.githubusercontent.com/38637722/179394623-98255cf0-bff3-471c-b0d3-9ee93b670260.png">
+<img width="283" alt="image" src="https://user-images.githubusercontent.com/38637722/179394680-2ce15475-e078-4518-9ec1-e2063dd7a358.png">
 
 Figure 3 illustrates the delay analysis and transmitted sequence of classical G16B3 frame with IBBBPBBBPBBBPBBBI GoP pattern. The decoder needs both the preceding I and P-frame and the succeeding P and I-frame for decoding a B-frame. The encoder emits the frames in the order IPBBBPBBBPBBBI and, the display sequence is displayed in the order IBBBPBBBPBBBPBBB.
 <img width="293" alt="image" src="https://user-images.githubusercontent.com/38637722/179394402-c0e78554-3c9e-44df-b193-2023fb029f48.png">
