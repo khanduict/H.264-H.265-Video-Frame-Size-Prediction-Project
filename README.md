@@ -36,7 +36,7 @@ The proposed model architecture for predicting the frame size. We present only t
 <img width="361" alt="image" src="https://user-images.githubusercontent.com/38637722/179399587-a6fc8efc-cfe5-4286-b76f-47124e91d9b4.png">
 <img width="361" alt="image" src="https://user-images.githubusercontent.com/38637722/179399610-17ba3a3d-6ce9-4be8-a961-7687d44fe005.png">
 
-#Conclusion
+# Conclusion
 We have focused on predicting video frame sizes for H.264 and H.265 video traces based on neural network models. We have proposed and implemented Long Short Term Memory (LSTM), Convolutional Neural Networks (CNN) and Sequence-to-Sequence (seq2seq) models to exploit their capability to capture long- range dependence and non-linearity. Our models were shown to significantly outperform other models from the literature. The seq2seq model provided the best results overall. We also used a case study on traffic policing to show how an efficient model as the one proposed in this work can significantly help in network administration.
 We also focused specifically on B frame size prediction, because of the possibility that B frames offer to be selectively dropped, thus reducing bandwidth requirements and smoothing the encoded video stream, when the network is congested. We compared the accuracy of the neural network models again by comparing against three efficient approaches from the literature and showing that our models excel.
 
