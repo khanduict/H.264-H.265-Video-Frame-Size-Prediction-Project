@@ -17,7 +17,30 @@ B-frames occupy the largest number of frames in H.264 group of pictures (GoP) as
 Figure 3 illustrates the delay analysis and transmitted sequence of classical G16B3 frame with IBBBPBBBPBBBPBBBI GoP pattern. The decoder needs both the preceding I and P-frame and the succeeding P and I-frame for decoding a B-frame. The encoder emits the frames in the order IPBBBPBBBPBBBI and, the display sequence is displayed in the order IBBBPBBBPBBBPBBB.
 <img width="429" alt="image" src="https://user-images.githubusercontent.com/38637722/179394884-2997039e-dfe0-45c5-ac47-59be4721acc8.png">
 
-#
+We worked with 12 different H.264 AVC video traces. All H.264 videos have the same periodic structure in which video frames are encoded. This periodic structure is called a Group of Pictures (GoP) and is defined as GaBz, where a is the total number of frames in the GoP and z is the number of consecutive B frames in each GoP. More specifically, we used the video traces of “Tokyo Olympics”, “Silence of the Lambs”, “NBC-news” and “Star Wars IV” each of them in the G16B3 types of GOP (periodically repeated structure of 16 frames as follows: IBBBPBBBPBBBPBBBIBBBPBBBPBBBPBBBI) and each of them in Low Quality (LQ), with QP = 48, Medium Quality (MQ) with QP = 38 and High Quality (HQ) with QP = 28. QP stands for Quantization Parameter, with lower QP values depicting a finer quantization and higher QP values depicting a rougher quantization. 
+Similarly, for H.265, we worked with 12 different single layer H.265 video traces. We used the video traces of “Big Buck Bunny”, “Elephants Dream”, “Blue Planet”, “Tears of Steel”, each of them in Low Quality (LQ), with QP = 40, Medium Quality (MQ) with QP = 25 and High Quality (HQ) with QP = 10. All the traces use the compression format G24B7. The words “trace” and “movie” are used interchangeably throughout the rest of the paper. 
+
+# Video traffic characteristics
+Due to the continuous and ordered nature of time series data, there is often some degree of correlation between the series observations. Therefore, past observations may contain predictive information about future events, which could be utilized to forecast future observations. In this section, we focus on identifying such relationships in the video traces of our study, with the use of correlation analysis.
+<img width="315" alt="image" src="https://user-images.githubusercontent.com/38637722/179399238-c2591886-dae3-414f-833c-211f2888533d.png">
+As shown indicatively in the above Figure, for the H.264 NBC News trace, the autocorrelation values were very close to 1 for the first lags, indicating a strong Short Range Dependence, however the autocorrelation of B frames quickly decreased, indicating an absence of Long Range Dependence. 
+
+<img width="316" alt="image" src="https://user-images.githubusercontent.com/38637722/179399248-f0be8b01-c560-4f44-ae28-cdadb24f1f05.png">
+As for the H.265 encoded video traces, the curves of the autocorrelation between B frames show a different behavior. The strongest correlations are observed for the vast majority of the H.265 video traces for lag=7 and lag=14, as shown indicatively for one trace in Figure 2. The high autocorrelations for lags that are multiples of 7 can be explained by the GoP structure (G24B7) of the traces. Also, the  autocorrelation of B frames for movies encoded in LQ is typically weaker than the autocorrelation of the movies encoded in MQ and HQ, for both H.264 and H.265 traces.
+
+# Proposed Model
+<img width="312" alt="image" src="https://user-images.githubusercontent.com/38637722/179399350-09acab2b-2988-494f-90be-70def39f193c.png">
+The proposed model architecture for predicting the frame size. We present only the LSTM and seq2seq models in the figure (the approach is similar for the other models that we have used in this study). The input of our model consists of frame size, frame type and arrival time. Based on the encoding sequence of a GoP structure, the frame size arrives at an interval of every 33 milliseconds. Feature engineering is carried out by filling the missing values, rescaling the data into similar scale using MinMax scaler. Then we have used a label encoding, as explained above. We then partitioned the data into a training (80%) and test (20%) dataset and built the predictive models for each trace separately. Finally, the whole GoP structure regardless of the frame type is fitted to the model to predict the frame size. 
+Model	Best fit parameters for the proposed models
+LSTM	Input=(lookback,1), hidden layers 128 unit, activation, relu, dropout (0.2), L1 regularizer, adam optimizer, mean square error
+CNN	Convolution 1D kernel=2x2 stride=1 + ReLU,  max pooling kernel=2x2 stride=1, dropout(0.2), Dense layer
+Seq2seq 	LSTM encoder and decoder, input_seq_len = 8 , output_seq_len = 4
+num_input_features = 1 , num_output_features = 1, batch_size = 10, hidden unit= 128, loss = mse, optimizer =adam, 
+![image](https://user-images.githubusercontent.com/38637722/179399500-e4cb6b18-9434-4de6-9c80-a9a626a44d36.png)
+
+
+
+
 
 
 
